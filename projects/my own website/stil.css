@@ -1,3 +1,16 @@
 body{
-    background:linear-gradient(blue, red);
+    background:linear-gradient(orange, red);
+    color:white;
+    text-shadow: 0px 3px 2px black;
+    background-repeat: no-repeat;
+    background-size:100vw;
+    height:100vh;
+    margin:0;
+    padding:2rem;
+}
+
+table, tr, th, td{
+    border-collapse: collapse;
+    margin:0;
+    border:2px solid black;
 }

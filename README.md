@@ -1,5 +1,5 @@
 - 👋 Hi, I’m @ulrikHesmyr
-- 👀 I’m interested in js
+- 👀 I’m interested in coding, video editing, photography and soccer. 
 - 🌱 I’m currently learning js
 - 💞️ I’m looking to collaborate on projects
 - 📫 How to reach me @bjoerkum on instagram

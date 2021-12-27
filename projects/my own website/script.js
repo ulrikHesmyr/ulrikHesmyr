@@ -2,6 +2,7 @@ window.addEventListener('load', init);
 
 function init() {
     hentNavn();
+    console.log('vi er set!')
 
 
 }

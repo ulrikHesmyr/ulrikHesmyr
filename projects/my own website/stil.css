@@ -1,16 +1,67 @@
+:root{
+    --1:#cbf078;
+    --2:#f8f398;
+    --3:#f1b963;
+    --4:#e46161;
+}
+
 body{
-    background:linear-gradient(orange, red);
+    background:white;
     color:white;
     text-shadow: 0px 3px 2px black;
     background-repeat: no-repeat;
     background-size:100vw;
-    height:100vh;
+    height:90vh;
     margin:0;
     padding:2rem;
+    font-family: 'Exo', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#startskjerm{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.intro{
+    display: flex;
+    flex-direction: row;
+    padding:2rem;
+}
+
+.intro div{
+    padding:2rem;
+    cursor: pointer;
+    background:var(--4);
+    margin:1rem;
+    height: fit-content;
+    text-align:center;
 }
 
 table, tr, th, td{
     border-collapse: collapse;
     margin:0;
     border:2px solid black;
+}
+
+footer{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    color: black;
+    text-transform: uppercase;
+    font-weight: bolder;
+    text-shadow: 0 0 0 ;
+}
+
+.visibility{
+    opacity:0.5;
+}
+
+.active{
+    box-shadow: 2px 2px 2px black;
 }

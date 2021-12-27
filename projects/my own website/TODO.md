@@ -1,0 +1,2 @@
+- Sjekke om passordet har minst 5 sifre
+- Passe på at det ikke finnes noen med likt brukernavn fra før

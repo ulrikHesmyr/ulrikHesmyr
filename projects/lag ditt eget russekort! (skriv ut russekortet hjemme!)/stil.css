@@ -1,0 +1,317 @@
+body {
+    margin: 0;
+    user-select: none;
+    transition: 2s all ease;
+    opacity: 0;
+    padding: 1rem;
+    width: 100vw;
+}
+
+input,
+option,
+select,
+button {
+    cursor: pointer;
+}
+
+/*-------------------------------------------- header*/
+header {
+    background-color: red;
+    display: flex;
+    flex-direction: row;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: white;
+    width: 100%;
+
+}
+
+header h1 {
+    margin: 1.5rem;
+}
+
+#tannhjul {
+    width: 3rem;
+    margin: 2rem;
+    cursor: pointer;
+    transition: 0.2s all ease;
+    background-clip: content-box;
+
+}
+
+#tannhjul:hover {
+    transform: scale(1.2);
+}
+
+
+.exit {
+    background-color: red;
+    border: thin black solid;
+    width: 2rem;
+    cursor: pointer;
+    height: 2rem;
+    text-align: center;
+}
+
+#settings {
+    position: fixed;
+    z-index: 2;
+    right: 1rem;
+    display: none;
+    transition: ease all 0.8s;
+    opacity: 0;
+}
+
+#settings p {
+    margin: 0;
+    background-color: white;
+    color: red;
+    border-radius: 1rem;
+    padding: 1rem;
+    border: thin solid black;
+    transition: ease all 0.3s;
+    cursor: pointer;
+
+}
+
+#settings p:hover {
+    background-color: gold;
+
+}
+
+#settings .angre {
+    background-color: red;
+    color: black;
+    display: none;
+    width: fit-content;
+    border-radius: 0 0 0.5rem 0.5rem;
+    height: 0.5rem;
+    text-transform: uppercase;
+    padding-top: 0.1rem;
+    margin-bottom: 0.1rem;
+    transition: 0.2s all ease;
+}
+
+/*-------------------------------------------- edit*/
+.edit,
+.edit section {
+    display: flex;
+    flex-direction: column;
+    margin: 2rem;
+}
+
+.edit label,
+.edit label input {
+    margin: 2px;
+    width: fit-content;
+}
+
+#tilfeldigsitater {
+    visibility: hidden;
+    margin: 0;
+    overflow: hidden;
+}
+
+#egnesitater {
+    margin: 0;
+    overflow: hidden;
+}
+
+/*-------------------------------------------- kort*/
+.container {
+    width: 32em;
+    height: 18em;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bolder;
+    font-size: 1rem;
+
+    display: grid;
+    grid-template-columns: 0.75fr 0.5fr 1.1fr;
+    grid-template-rows: 2rem 2rem 0.5fr 0.2fr 1fr;
+    gap: 0.1rem;
+    padding: 0.1rem;
+    overflow: hidden;
+    background-color: red;
+    text-align: right;
+    margin: 2rem;
+
+}
+
+.gruppelogo img {
+    max-height: inherit;
+    max-width: inherit;
+    text-align: left;
+    box-sizing: border-box;
+    height: inherit;
+    width: inherit;
+    margin: 0;
+}
+
+.gruppelogo {
+    margin-top: 1.6rem;
+    margin-right: 2rem;
+    grid-column: 2/span 1;
+    grid-row: 3/span 3;
+    max-height: 6rem;
+    max-width: 7rem;
+    overflow: hidden;
+}
+
+.container .grid {
+    padding: 0.1rem;
+}
+
+
+.header {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    font-size: 1.5rem;
+    padding: 0.1rem;
+    letter-spacing: 0.2rem;
+    text-align: center;
+}
+
+.content-large {
+    grid-row-start: 2;
+    grid-row-end: span 4;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    box-sizing: border-box;
+    transform: rotate(-5deg);
+    padding: 0;
+    height: 15rem;
+    max-height: 15rem;
+    max-width: 10rem;
+    box-shadow: 5px 5px 5px black;
+    overflow: hidden;
+    border: 4px solid black;
+}
+
+.content-large img {
+    box-sizing: border-box;
+    height: inherit;
+    width: inherit;
+    margin: 0;
+    overflow: hidden;
+
+
+}
+
+.content-small {
+    grid-column: 3 / span 2;
+    grid-row-start: 4;
+    grid-row-end: span 1;
+
+}
+
+
+
+
+.navn {
+    grid-row-start: 3;
+    grid-row-end: span 1;
+    grid-column: 3/ span 1;
+    font-size: 1.5rem;
+
+    align-content: center;
+    overflow: hidden;
+}
+
+.footer {
+
+    text-align: right;
+    grid-row: 5/ span 1;
+    grid-column: 2 / span 2;
+    /*box-sizing: border-box;
+    overflow: hidden;*/
+    font-size: smaller;
+
+
+}
+
+.tilfeldigSitat {
+    font-size: 1.2rem;
+    visibility: hidden;
+    grid-row: 5/ span 1;
+    grid-column: 2/ span 2;
+    margin-left: 0.2rem;
+}
+
+.footer p {
+    margin: 0.1rem;
+}
+
+.russ {
+    grid-column: 2 / span 2;
+    grid-row-start: 2;
+    grid-row-end: span 1;
+    font-size: 3rem;
+    text-align: center;
+    color: white;
+    font-weight: lighter;
+    text-shadow: 2px 2px 2px black;
+
+    font-family: 'Modak', cursive;
+}
+
+#buttonPrint {
+    margin: 2rem;
+}
+
+.lagredeRussekort {
+    visibility: hidden;
+    height: 1px;
+    width: 1px;
+
+}
+
+.visible {
+    float: right;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    visibility: visible;
+    height: fit-content;
+    width: fit-content;
+    flex-direction: column;
+
+}
+
+.visible * {
+    gap: 0;
+    padding: 0;
+    margin: 0;
+}
+
+/*Beskjeder*/
+#actionMessage {
+
+    transition: ease all 0.3s;
+    position: fixed;
+    top: 2rem;
+    left: 45%;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 1.4rem;
+    font-weight: bolder;
+    text-transform: uppercase;
+    background: linear-gradient(#5a1d1d, #d12626);
+    padding: 0.4rem;
+    color: white;
+    border-radius: 3px;
+    box-shadow: 0 0 7px rgba(0, 0, 0, 0.3);
+}
+
+.actionMessage {
+    opacity: 0;
+}
+
+.show {
+    transform: translateZ(-10%);
+    opacity: 0.8;
+}
+
+/*Deaktiverte funksjonaliteter*/
+
+#buttonGetSaved {
+    display: none;
+}

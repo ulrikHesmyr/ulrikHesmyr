@@ -1,0 +1,42 @@
+* {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+body {
+    display: grid;
+    grid-template-columns: 22rem 22rem;
+    /*24rem 24rem*/
+    grid-template-rows: repeat(5, 13rem);
+    gap: 2mm !important;
+    row-gap: 1mm !important;
+    row-gap: 2mm !important;
+    overflow: hidden !important;
+    align-items: center;
+    justify-items: center;
+    height: 100%;
+    margin-left: 7.4mm !important;
+    margin-top: 6mm !important;
+
+
+}
+
+.container {
+    transform: scale(0.69);
+
+    padding-right: 0.2rem !important;
+}
+
+.remove {
+    display: none;
+}
+
+.content-small {
+    text-align: right;
+}
+
+.gruppelogo {
+    margin-top: 1.6rem !important;
+
+    margin-right: 2rem !important;
+}

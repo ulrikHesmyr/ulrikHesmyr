@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="no">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="stil.css" type="text/css" media="all">
+    <link rel="stylesheet" href="print.css" type="text/css" media="print">
+    <!--<link id="" rel="stylesheet" href="print.css" type="text/css" media="print">-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Modak&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+    <title>Lag ditt eget russekort og skriv ut på papir hjemme! - Russekortgenerator</title>
+</head>
+
+<body>
+    <div class="remove actionMessage" id="actionMessage">hei</div>
+    <header class="remove">
+        <h1>Russekortgenerator - spesialkort</h1>
+        <img id="tannhjul"src="./bilder/Tannhjul.png" alt="innstillinger">
+        <div class="remove" id="settings">
+            <div class="exit">X</div>
+            <p id="fjernRussegruppe" >Fjern russelogo og russegruppe fra kort</p>
+            <p class="angre">angre</p>
+            <p id="midtstill">Midtstill bilde  </p>
+            <p class="angre">angre</p>
+            <p id="endreAar">Endre utgangsår: <input type="text" placeholder="2022" value="2022"></p>
+            <p class="angre">angre</p>
+        </div></header>
+    
+    <div class="edit remove">
+
+        <label>Last opp bildefil:
+            <input id="bilde" type='file' />
+        </label>
+        <label>Skriv inn skolen din: <input id="skole_input" type="text" placeholder="Skien Videregående Skole"></label>
+        <label>Skriv inn navnet ditt: <input id="navn_input" type="text" placeholder="Navn Navnesen"></label>
+        <label>Velg farge på kort (tekst endres automatisk):
+            <label>Rød: <input type="radio" name="farge" value="red" checked></label>
+            <label>Blå: <input type="radio" name="farge" value="blue"></label>
+            <label>Sort: <input type="radio" name="farge" value="black"></label></label>
+        <label>Skriv inn for adresse: <input id="adresse_input" type="text" placeholder="Bakerste rad"></label>
+        <label>Skriv inn tlf: <input id="tlf_input" type="text" placeholder="bruker bare faxmaskin..."></label>
+        <label class="russe">Skriv inn russegruppe: <input  class="russe" id="gruppe_input" type="text" placeholder="Backrow 2022"></label>
+        <label class="russe">Velg logo for russegruppe: <input class="russe" id="logoFile" type='file' />  </label> 
+        <label >Skrive eget sitat, eller få tildelt et tilfeldig sitat?
+        <select>
+            <option value="eget" name="sitat">Eget sitat</option>
+            <option value="tilfeldig" name="sitat">Tilfeldig</option>
+        </select></label>
+        <section id="egnesitater">
+        <label>Skriv inn sitat linje 1: <input class="sitat_input" type="text"
+                placeholder="Don't count the days, "></label>
+        <label>Skriv inn sitat linje 2: <input class="sitat_input" type="text"
+                placeholder="make the days count"></label>
+        <label>Skriv inn sitat linje 3: <input class="sitat_input" type="text"
+                placeholder=";)"></label>
+            </section>
+        <section id="tilfeldigsitater">
+            <label>Trykk for å få et tildelt tilfeldig sitat: <button>Klikk her</button></label>
+        </section>
+
+    </div>
+    
+    <div class="remove lagredeRussekort" id="lagredeRussekort" >
+        Her er dine lagrede russekort-design:
+    </div>
+
+    <div id="russekortet" class="container">
+        <div class="header">Skien Videregående Skole</div>
+        <div class="content-large"><img id="russebilde" src="./bilder/R.jfif"></div>
+        <div class="grid russ">Rødruss 2022</div>
+        <div class="grid navn"><br>Navn Navnesen</div>
+        <div class="gruppelogo russe"><img class="russe" id="russelogoen" src="./bilder/backrow.JPG" alt="Bilde av russegruppen sin logo!"></div>
+        <div class="grid content-small">
+            <div class="adresse">Adresse: Bakerste rad </div>
+            <div class="tlf">Tlf.: bruker bare faxmaskin...</div>
+            <div class="gruppe russe">Russegruppe: Backrow 2022</div>
+            
+        </div>
+        <div class="tilfeldigSitat"></div>
+        <div class="footer">
+            <p>Don't count the days, </p>
+            <p>make the days count</p>
+            <p> ;)    </p>
+        </div>
+
+    </div>
+
+
+    <label class="remove" for="">Skriv ut russekortet på pronteren hjemme!</label><button class="remove" id="buttonPrint"><span class="material-icons">
+        print
+        </span></button> 
+    <label class="remove" for="button">Lagre designet! </label><button class="remove" id="buttonSave"><span class="material-icons">
+        save
+        </span></button> 
+    <button class="remove" id="buttonGetSaved">klikk for å hente et lagret design</button> 
+</body>
+
+</html>

@@ -1,0 +1,6 @@
+- miste liv når treffer bakken
+- bruke localStorage for å lagre prestige
+- ha en startknapp for å starte
+- Knapp for å prøve igjen 
+- pausefunksjon
+- lagre UPGRADES i localStorage

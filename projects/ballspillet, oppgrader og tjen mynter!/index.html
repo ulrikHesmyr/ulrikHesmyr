@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="no">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="stil.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather&family=Roboto+Condensed:wght@300&display=swap"
+        rel="stylesheet">
+    <title>Animasjon</title>
+</head>
+
+<body>
+    <main>
+        <h1>Bruk piltastene for å bevege "paden" til høyre eller venstre!</h1>
+        <h2>Vinn ved å nå 100 poeng! Hvis ballen treffer bunnen så mister du poengene dine.</h2>
+        <h3>Spillet blir vanskeligere for hvert level!</h3>
+
+        <div class="stats">
+            <div id="butikkBtn"><span class="material-icons">
+                    storefront
+                </span>Kjøp oppgraderinger for myntene dine!</div>
+            <div id="penger"><span class="material-icons">
+                    savings
+                </span>0 mynter</div>
+            <div id="poengtelling">Poeng: 0</div>
+            <div id="level">Level: 1</div>
+            <!--<div id="antallLiv">Antall forsøk igjen: 3</div>-->
+            <div id="stats">Ballens fart: 7 <br> Padens fart: 50
+            </div>
+        </div>
+        <div class="info">
+            <p>Få 1 mynt pr poeng!</p>
+            <p>Få 10 mynter pr level!</p>
+            <p>Få 180 mynter når du når level 6, altså får 100 poeng!</p>
+            <p>Myntene dine LAGRES selv når du går ut og skrur av PCen!</p>
+            <p>Trykk på ENTER<span class="material-icons">
+                keyboard
+            </span> for å pause spillet!</p>
+        </div>
+        <canvas id="canvasAnimert" width="800" height="500">
+            Kan ikke vise innholdet.
+        </canvas>
+    </main>
+    <div id="butikken">
+        <div>
+            Oppgrader fart på paden!
+            Forstørr ballen!
+        </div>
+    </div>
+    <div class="visible" id="pause">
+        spillet er på pause, trykk ENTER<span class="material-icons">
+            keyboard
+        </span> for å fortsette
+    </div>
+</body>
+
+</html>

@@ -1,2 +1,4 @@
 - Sjekke om passordet har minst 5 sifre
-- Passe på at det ikke finnes noen med likt brukernavn fra før
+- Passe på at det ikke finnes noen med likt brukernavn fra før når man registrerer
+- legge til tidspunkt for registrering
+- sjekke etter spesialtegn i brukernavn og passord! NB

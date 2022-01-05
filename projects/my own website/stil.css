@@ -5,10 +5,60 @@
     --4:#e46161;
 }
 
+@media screen and (max-width:660px){
+    .intro div{
+        padding: 0;
+        margin:0.1rem;
+    }
+}
+/*Google materials*/
+.md1{
+    font-size: 1rem;
+}
+.md15{
+    font-size: 1.5rem;
+}
+.md2{
+    font-size: 2rem;
+}
+.md25{
+    font-size: 2.5rem;
+}
+.md3{
+    font-size: 3rem;
+}
+.md35{
+    font-size: 3.5rem;
+}
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;  /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+  
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+  
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+  
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+  }
+
 body{
     background:white;
     color:white;
-    text-shadow: 0px 3px 2px black;
     background-repeat: no-repeat;
     background-size:100vw;
     height:90vh;
@@ -22,10 +72,14 @@ body{
 
 #startskjerm{
     display: flex;
-    align-items: center;
+    align-items: stretch;
     justify-content: center;
     flex-direction: column;
+    user-select: none;
+    
+    text-shadow: 0px 3px 2px black;
 }
+
 .intro{
     display: flex;
     flex-direction: row;
@@ -34,11 +88,12 @@ body{
 
 .intro div{
     padding:2rem;
-    cursor: pointer;
     background:var(--4);
     margin:1rem;
+    
     height: fit-content;
     text-align:center;
+    width:20rem;
 }
 
 table, tr, th, td{
@@ -57,11 +112,38 @@ footer{
     font-weight: bolder;
     text-shadow: 0 0 0 ;
 }
+footer div{
+    margin-top:1rem;
+}
 
 .visibility{
     opacity:0.5;
+    
+    cursor:default;
 }
 
 .active{
-    box-shadow: 2px 2px 2px black;
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.7);
+}
+.currentVisible{
+    transition:0.2s ease all;
+    
+    cursor: pointer;
+}
+.currentVisible:hover{
+    box-shadow: 0 0 16px rgba(0,0,0, 0.7);
+}
+#loginnEllerRegistrerSkjerm{
+    color:black;
+}
+.showBox{
+    height:0.01rem;
+    overflow: hidden;
+    visibility: hidden;
+}
+.registrerLoginnFelt{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
 }

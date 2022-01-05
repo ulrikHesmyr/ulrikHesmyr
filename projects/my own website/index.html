@@ -9,48 +9,42 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Exo:ital,wght@1,600&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Two+Tone" rel="stylesheet">
     <title>Russekort</title>
 </head>
 
 <body>
-        <div id="startskjerm" class="remove">
-            <div class="intro" id="first">
-                <div class="currentVisible">Har du bruker fra før? Logg inn her! <span class="material-icons md1">
-                        login
-                    </span></div>
-                <div class="currentVisible">Vil du registrere bruker?<br> Registrer deg som samler,
-                    eller som russ her! <span class="material-icons md1">
-                        person_add
-                    </span>
-                </div>
-            </div>
-            <div class="intro visibility" id="loginn">
-                <div>Logg inn som russ ved bruk av feide her!</div>
-                <div id="logInnSamlerKnapp">Logg inn som samler her!</div>
-            </div>
+    <div id="hovering" class="remove hovering"></div>
+    <header >
 
-            <div class="intro visibility" id="registrer">
-                <div class="registrerKnapper">Registrer deg som russ med feide-brukeren din her!</div>
-                <div class="registrerKnapper">Registrer deg som samler her!</div>
-            </div>
+        <div id="top">
+            <h1>Russekort-generatoren</h1>
+            <h2>Lag eller samle russekort, skriv ut kortene hjemme, samle i din digitale kolleksjon!</h2>
+        </div>
+        <div>
+            <span class="material-icons-two-tone md-48 remove" data-text="Logg inn!">
+                account_circle
+            </span>
+            <span class="material-icons-two-tone md-48 remove" data-text="Registrer bruker!">
+                person_add
+            </span>
+        </div>
+    </header>
+
+    <div id="loginnEllerRegistrerSkjerm" class="remove">
+        <div id="registrerSamler" class="showBox registrerLoginnFelt">
+            <h2>Registrer deg som samler her!</h2>
+            <label>Skriv inn ønsket brukernavn: <input id="registrerSamlerBrukernavnInput" type="text"></label>
+            <label>Registrer ditt passord: <input id="registrerSamlerPassordInput" type="text"></label>
+            <label>Trykk for å registrere bruker! <button id="submitSamler" type="text">Trykk her</button></label>
         </div>
 
-        <div id="loginnEllerRegistrerSkjerm" class="remove">
-            <div id="registrerSamler" class="showBox registrerLoginnFelt">
-                <h2>Registrer deg som samler her!</h2>
-                <label>Skriv inn ønsket brukernavn: <input id="registrerSamlerBrukernavnInput" type="text"></label>
-                <label>Registrer ditt passord: <input id="registrerSamlerPassordInput" type="text"></label>
-                <label>Trykk for å registrere bruker! <button id="submitSamler" type="text">Trykk her</button></label>
-            </div>
-
-            <div id="logInnSamler" class="showBox registrerLoginnFelt">
-                <h2>Log inn som samler her!</h2>
-                <label>Brukernavn:<input type="text"></label>
-                <label>Passord: <input type="text"></label>
-                <label>Trykk for å registrere bruker! <button id="loginnSamlerSubmit" type="text">Trykk
-                        her</button></label>
-            </div>
+        <div id="logInnSamler" class="showBox registrerLoginnFelt">
+            <h2>Logg inn som samler her!</h2>
+            <label>Brukernavn:<input type="text"></label>
+            <label>Passord: <input type="text"></label>
+            <label>Trykk for å registrere bruker! <button id="loginnSamlerSubmit" type="text">Trykk
+                    her</button></label>
         </div>
     </div>
 

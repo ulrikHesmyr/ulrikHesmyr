@@ -9,52 +9,58 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Exo:ital,wght@1,600&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>Russekort</title>
 </head>
 
 <body>
-    <div id="startskjerm">
-        <div class="intro" id="first">
-            <div class="currentVisible">Har du bruker fra før? Logg inn her! <span class="material-icons md1">
-            login
-                </span></div>
-            <div class="currentVisible">Vil du registrere bruker?<br> Registrer deg som samler,
-                 eller som russ her! <span class="material-icons md1">
-                    person_add
-                        </span>
+        <div id="startskjerm" class="remove">
+            <div class="intro" id="first">
+                <div class="currentVisible">Har du bruker fra før? Logg inn her! <span class="material-icons md1">
+                        login
+                    </span></div>
+                <div class="currentVisible">Vil du registrere bruker?<br> Registrer deg som samler,
+                    eller som russ her! <span class="material-icons md1">
+                        person_add
+                    </span>
+                </div>
+            </div>
+            <div class="intro visibility" id="loginn">
+                <div>Logg inn som russ ved bruk av feide her!</div>
+                <div id="logInnSamlerKnapp">Logg inn som samler her!</div>
+            </div>
+
+            <div class="intro visibility" id="registrer">
+                <div class="registrerKnapper">Registrer deg som russ med feide-brukeren din her!</div>
+                <div class="registrerKnapper">Registrer deg som samler her!</div>
             </div>
         </div>
-        <div class="intro visibility" id="loginn">
-            <div>Logg inn som russ ved bruk av feide her!</div>
-            <div>Logg inn som samler her!</div>
-        </div>
 
-        <div class="intro visibility" id="registrer">
-            <div class="registrerKnapper">Registrer deg som russ med feide-brukeren din her!</div>
-            <div class="registrerKnapper">Registrer deg som samler her!</div>
+        <div id="loginnEllerRegistrerSkjerm" class="remove">
+            <div id="registrerSamler" class="showBox registrerLoginnFelt">
+                <h2>Registrer deg som samler her!</h2>
+                <label>Skriv inn ønsket brukernavn: <input id="registrerSamlerBrukernavnInput" type="text"></label>
+                <label>Registrer ditt passord: <input id="registrerSamlerPassordInput" type="text"></label>
+                <label>Trykk for å registrere bruker! <button id="submitSamler" type="text">Trykk her</button></label>
+            </div>
+
+            <div id="logInnSamler" class="showBox registrerLoginnFelt">
+                <h2>Log inn som samler her!</h2>
+                <label>Brukernavn:<input type="text"></label>
+                <label>Passord: <input type="text"></label>
+                <label>Trykk for å registrere bruker! <button id="loginnSamlerSubmit" type="text">Trykk
+                        her</button></label>
+            </div>
         </div>
     </div>
 
-    <div id="loginnEllerRegistrerSkjerm">
-        <div id="registrerSamler" class="showBox registrerLoginnFelt">
-            <h2>Registrer deg som samler her!</h2>
-            <label>Skriv inn ønsket brukernavn: <input id="registrerSamlerBrukernavnInput" type="text"></label>
-            <label>Registrer ditt passord: <input id="registrerSamlerPassordInput" type="text"></label>
-            <label>Trykk for å registrere bruker! <button id="submitSamler" type="text">Trykk her</button></label>
+    <main id="brukerSide" class="showBox">
+        <div>
+            <div>Du er nå logget inn!</div>
         </div>
-        <!--
-        <div id="logInnSamler" class="showBox registrerLoginnFelt">
-            <h2>Log inn som samler her!</h2>
-            <label>Brukernavn:<input id="registrerSamlerBrukernavnInput" type="text"></label>
-            <label>Registrer ditt passord: <input id="registrerSamlerPassordInput" type="text"></label>
-            <label>Skriv inn ønsket brukernavn: <input id="registrerBrukernavnInput" type="text"></label>
-            <label>Trykk for å registrere bruker! <button id="submitSamler" type="text">Trykk her</button></label>
-        </div>-->
-    </div>
-    
-    <footer>
+    </main>
+
+    <footer class="remove">
         <div>Fakta: Russen kan også samle på russekort! Finn samlingen på "din side"</div>
         <div>Dagens samler er:</div>
         <div>Beste samler i år: Filip K.L. Russ 2019, samlet 60 kort på en dag, 890 kort totalt</div>

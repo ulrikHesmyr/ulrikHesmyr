@@ -136,10 +136,17 @@ footer div{
 #loginnEllerRegistrerSkjerm{
     color:black;
 }
+
+#brukerSide{
+    color:red;
+}
 .showBox{
-    height:0.01rem;
-    overflow: hidden;
-    visibility: hidden;
+    height:0.001rem !important;
+    width:0.001rem !important;
+    overflow: hidden !important;
+    visibility: hidden !important;
+    margin:0 !important;
+    padding:0 !important;
 }
 .registrerLoginnFelt{
     display: flex;

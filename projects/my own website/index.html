@@ -5,38 +5,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="stil.css">
+    
+    <link rel="stylesheet" href="print.css" type="text/css" media="print">
     <script src="script.js" defer></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Exo:ital,wght@1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@600&family=Exo:ital,wght@1,600&display=swap&family=Modak&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Two+Tone" rel="stylesheet">
     <title>Russekort</title>
 </head>
 
 <body>
-    <div id="hovering" class="remove hovering"></div>
-    <header >
+    <div id="hovering" class="hovering removal"></div>
+    <div id="alerted" class="alerted showBox removal" ></div>
+    <header class="removal">
 
-        <div id="top">
+        <div id="top" class="removal">
             <h1>Russekort-generatoren</h1>
             <h2>Lag eller samle russekort, skriv ut kortene hjemme, samle i din digitale kolleksjon!</h2>
         </div>
         <div>
-            <span class="material-icons-two-tone md-48 remove" data-text="Logg inn!">
+            <span class="material-icons-two-tone md-3 remove" data-text="Logg inn!">
                 account_circle
             </span>
-            <span class="material-icons-two-tone md-48 remove" data-text="Registrer bruker!">
+            <span class="material-icons-two-tone md-3 remove" data-text="Registrer bruker!">
                 person_add
+            </span>
+            <span id="dinProfil"class="material-icons-two-tone md-3 showBox removal" data-text="Din profil">
+                face
             </span>
         </div>
     </header>
 
-    <div id="loginnEllerRegistrerSkjerm" class="remove">
+    <div id="loginnEllerRegistrerSkjerm" class="remove removal">
         <div id="registrerSamler" class="showBox registrerLoginnFelt">
             <h2>Registrer deg som samler her!</h2>
             <label>Skriv inn ønsket brukernavn: <input id="registrerSamlerBrukernavnInput" type="text"></label>
             <label>Registrer ditt passord: <input id="registrerSamlerPassordInput" type="text"></label>
-            <label>Trykk for å registrere bruker! <button id="submitSamler" type="text">Trykk her</button></label>
+            <label>Trykk for å logge inn! <button id="submitSamler" type="text">Trykk her</button></label>
         </div>
 
         <div id="logInnSamler" class="showBox registrerLoginnFelt">
@@ -48,18 +55,126 @@
         </div>
     </div>
 
-    <main id="brukerSide" class="showBox">
-        <div>
-            <div>Du er nå logget inn!</div>
+    <main id="brukerSide" class="showBox removal">
+        <div class="removal">
+            <div>Din side</div>
+            
+<!--Endre i funksjonen russeSide dersom du legger til flere spans-->
+            <span class="material-icons-two-tone md-3 removal" data-text="Lag ditt eget russekort!">
+                add
+            </span>
+            
+            <span class="material-icons-two-tone md-3 removal" data-text="Ditt russekort!">
+                account_box
+                </span>
+            <span class="material-icons-two-tone md-3 removal" data-text="Gå til russekort-samlingen!">
+                featured_play_list
+            </span>
         </div>
+
+<!--Endre i funksjonen russeSide dersom du legger til flere seksjoner-->
+        <section id="russe_seksjon" class="showBox russeside">
+
+            <header class="removal">
+                <h1>Russekortgenerator - spesialkort</h1>
+            <span id="tannhjul" class="material-icons-two-tone md-3 removal" data-text="Avansert - russekortet">
+                settings
+                </span>
+                <div class="removal" id="settings">
+                    <div class="exit">X</div>
+                    <p id="fjernRussegruppe">Fjern russelogo og russegruppe fra kort</p>
+                    <p class="angre">angre</p>
+                    <p id="midtstill">Midtstill bilde </p>
+                    <p class="angre">angre</p>
+                    <p id="endreAar">Endre utgangsår: <input type="text" placeholder="2022" value="2022"></p>
+                    <p class="angre">angre</p>
+                </div>
+            </header>
+
+            <div class="edit removal">
+
+                <label>Last opp bildefil:
+                    <input id="bilde" type='file' />
+                </label>
+                <label>Skriv inn skolen din: <input id="skole_input" type="text"
+                        placeholder="Skien Videregående Skole"></label>
+                <label>Skriv inn navnet ditt: <input id="navn_input" type="text" placeholder="Navn Navnesen"></label>
+                <label>Velg farge på kort (tekst endres automatisk):
+                    <label>Rød: <input type="radio" name="farge" value="red" checked></label>
+                    <label>Blå: <input type="radio" name="farge" value="blue"></label>
+                    <label>Sort: <input type="radio" name="farge" value="black"></label></label>
+                <label>Skriv inn for adresse: <input id="adresse_input" type="text" placeholder="Bakerste rad"></label>
+                <label>Skriv inn tlf: <input id="tlf_input" type="text" placeholder="bruker bare faxmaskin..."></label>
+                <label class="russe">Skriv inn russegruppe: <input class="russe" id="gruppe_input" type="text"
+                        placeholder="Backrow 2022"></label>
+                <label class="russe">Velg logo for russegruppe: <input class="russe" id="logoFile" type='file' />
+                </label>
+                <label>Skrive eget sitat, eller få tildelt et tilfeldig sitat?
+                    <select>
+                        <option value="eget" name="sitat">Eget sitat</option>
+                        <option value="tilfeldig" name="sitat">Tilfeldig</option>
+                    </select></label>
+                <section id="egnesitater">
+                    <label>Skriv inn sitat linje 1: <input class="sitat_input" type="text"
+                            placeholder="Don't count the days, "></label>
+                    <label>Skriv inn sitat linje 2: <input class="sitat_input" type="text"
+                            placeholder="make the days count"></label>
+                    <label>Skriv inn sitat linje 3: <input class="sitat_input" type="text" placeholder=";)"></label>
+                </section>
+                <section id="tilfeldigsitater">
+                    <label>Trykk for å få et tildelt tilfeldig sitat: <button>Klikk her</button></label>
+                </section>
+
+            </div>
+
+            <div class="removal lagredeRussekort" id="lagredeRussekort">
+                Her er dine lagrede russekort-design:
+            </div>
+
+            <div id="russekortet" class="container">
+                <div class="header">Skien Videregående Skole</div>
+                <div class="content-large"><img id="russebilde" src="./bilder/R.jfif"></div>
+                <div class="grid russ">Rødruss 2022</div>
+                <div class="grid navn"><br>Navn Navnesen</div>
+                <div class="gruppelogo russe"><img class="russe" id="russelogoen" src="./bilder/backrow.JPG"
+                        alt="Bilde av russegruppen sin logo!"></div>
+                <div class="grid content-small">
+                    <div class="adresse">Adresse: Bakerste rad </div>
+                    <div class="tlf">Tlf.: bruker bare faxmaskin...</div>
+                    <div class="gruppe russe">Russegruppe: Backrow 2022</div>
+
+                </div>
+                <div class="tilfeldigSitat"></div>
+                <div class="footer">
+                    <p>Don't count the days, </p>
+                    <p>make the days count</p>
+                    <p> ;) </p>
+                </div>
+
+            </div>
+
+
+            
+                <span id="buttonPrint" class="material-icons-two-tone md-25 removal" data-text="Skriv ut russekortet på printeren hjemme!">
+                    print
+                </span><span id="buttonSave"
+                    class="material-icons-two-tone md-25 removal" data-text="Lagre designet!">
+                    save
+                </span>
+            <button class="removal" id="buttonGetSaved">klikk for å hente et lagret design</button>
+        </section>
+        <section class="showBox russeside">SEKSJON 2</section>
+        <section class="showBox russeside">SEKSJON 3</section>
     </main>
 
-    <footer class="remove">
+    <footer class="removal">
         <div>Fakta: Russen kan også samle på russekort! Finn samlingen på "din side"</div>
         <div>Dagens samler er:</div>
-        <div>Beste samler i år: Filip K.L. Russ 2019, samlet 60 kort på en dag, 890 kort totalt</div>
+        <div>Beste samler i år: </div>
         <div>Beste samler igjennom tidene:</div>
+        <div>Bli med i konkurransen om å vinne russelåt med gruppa di! trykk her</div>
     </footer>
+    <div class="removal" id="credits">Nettside laget av @bjoerkum</div>
 </body>
 
 </html>

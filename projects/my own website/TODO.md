@@ -1,3 +1,4 @@
 - Sjekke om passordet har minst 5 sifre
 - legge til tidspunkt for registrering
 - Legge inn russekort-siden når du har logget inn
+- Lagre design spesifikt for hver enkelt bruker med localStorage, f.eks. ulrik rødruss, brian blåruss osv.

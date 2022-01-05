@@ -3,6 +3,8 @@
     --2:#f8f398;
     --3:#f1b963;
     --4:#e46161;
+    --font1:'Be Vietnam Pro', sans-serif;
+    --font2: 'Exo', sans-serif;
 }
 
 @media screen and (max-width:660px){
@@ -12,10 +14,10 @@
     }
 }
 /*Google materials*/
-.material-icons-two-tone.md-18 { font-size: 18px; }
-.material-icons-two-tone.md-24 { font-size: 24px; }
-.material-icons-two-tone.md-36 { font-size: 36px; }
-.material-icons-two-tone.md-48 { font-size: 3rem; }
+.material-icons-two-tone.md-15 { font-size: 1.5rem; }
+.material-icons-two-tone.md-2 { font-size: 2rem; }
+.material-icons-two-tone.md-25 { font-size: 2.5rem; }
+.material-icons-two-tone.md-3 { font-size: 3rem; }
 
 .material-icons-two-tone {
     font-family: 'Material Icons';
@@ -32,6 +34,7 @@
     cursor: pointer;
     transition:0.2s ease all ;
     user-select: none;
+    color:black;
   
     /* Support for all WebKit browsers. */
     -webkit-font-smoothing: antialiased;
@@ -61,12 +64,33 @@
     transition:ease all 0.2s;
 
 }
+
 .hovering{
     opacity: 0 !important;
 }
+
+
+#alerted{
+    position: fixed;
+    color:black;
+    top:20%;
+    right:20%;
+    font-size: 2rem;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    background-color: var(--2);
+    padding:0.3rem;
+    transition:ease all 0.2s;
+    border-radius: 10px;
+    z-index: 2000;
+}
+#credits{
+    position: static;
+    bottom:0;
+    margin:1rem;
+}
 body{
     background:white;
-    color:white;
+    color:black;
     background-repeat: no-repeat;
     background-size:100vw;
     height:90vh;
@@ -96,7 +120,7 @@ body{
 }
 header{
     color:black;
-    width:90vw;
+    width:90%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -182,9 +206,10 @@ footer div{
     align-items: center;
 }
 
-#brukerSide{
-    color:red;
+#loginnEllerRegistrerSkjerm * *{
+    margin:0.2rem;
 }
+
 .showBox{
     opacity: 0;
     height:0.001rem !important;
@@ -199,4 +224,258 @@ footer div{
     flex-direction: column;
     justify-content: center;
     align-content: center;
+}
+
+/*Russekortet-stilark*/
+
+.container {
+    width: 32em;
+    height: 18em;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: bolder;
+    font-size: 1rem;
+
+    display: grid;
+    grid-template-columns: 0.75fr 0.5fr 1.1fr;
+    grid-template-rows: 2rem 2rem 0.5fr 0.2fr 1fr;
+    gap: 0.1rem;
+    padding: 0.1rem;
+    overflow: hidden;
+    background-color: red;
+    text-align: right;
+    margin: 2rem;
+
+}
+
+.gruppelogo img {
+    max-height: inherit;
+    max-width: inherit;
+    text-align: left;
+    box-sizing: border-box;
+    height: inherit;
+    width: inherit;
+    margin: 0;
+}
+
+.gruppelogo {
+    margin-top: 1.6rem;
+    margin-right: 2rem;
+    grid-column: 2/span 1;
+    grid-row: 3/span 3;
+    max-height: 6rem;
+    max-width: 7rem;
+    overflow: hidden;
+}
+
+.container .grid {
+    padding: 0.1rem;
+}
+
+
+.header {
+    grid-column-start: 1;
+    grid-column-end: 4;
+    font-size: 1.5rem;
+    padding: 0.1rem;
+    letter-spacing: 0.2rem;
+    text-align: center;
+}
+
+.content-large {
+    grid-row-start: 2;
+    grid-row-end: span 4;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    box-sizing: border-box;
+    transform: rotate(-5deg);
+    padding: 0;
+    height: 15rem;
+    max-height: 15rem;
+    max-width: 10rem;
+    box-shadow: 5px 5px 5px black;
+    overflow: hidden;
+    border: 4px solid black;
+}
+
+.content-large img {
+    box-sizing: border-box;
+    height: inherit;
+    width: inherit;
+    margin: 0;
+    overflow: hidden;
+
+
+}
+
+.content-small {
+    grid-column: 3 / span 2;
+    grid-row-start: 4;
+    grid-row-end: span 1;
+
+}
+
+
+
+
+.navn {
+    grid-row-start: 3;
+    grid-row-end: span 1;
+    grid-column: 3/ span 1;
+    font-size: 1.5rem;
+
+    align-content: center;
+    overflow: hidden;
+}
+
+.footer {
+
+    text-align: right;
+    grid-row: 5/ span 1;
+    grid-column: 2 / span 2;
+    /*box-sizing: border-box;
+    overflow: hidden;*/
+    font-size: smaller;
+
+
+}
+
+.tilfeldigSitat {
+    font-size: 1.2rem;
+    visibility: hidden;
+    grid-row: 5/ span 1;
+    grid-column: 2/ span 2;
+    margin-left: 0.2rem;
+}
+
+.footer p {
+    margin: 0.1rem;
+}
+
+.russ {
+    grid-column: 2 / span 2;
+    grid-row-start: 2;
+    grid-row-end: span 1;
+    font-size: 3rem;
+    text-align: center;
+    color: white;
+    font-weight: lighter;
+    text-shadow: 2px 2px 2px black;
+
+    font-family: 'Modak', cursive;
+}
+
+
+
+#russeseksjon input,
+
+#russeseksjon option,
+
+#russeseksjon select,
+
+#russeseksjon button {
+    cursor: pointer;
+}
+
+/*-------------------------------------------- header*/
+
+#russeseksjon header {
+    background-color: red;
+    display: flex;
+    flex-direction: row;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: white;
+    width: 100%;
+
+}
+
+
+#russeseksjon header h1 {
+    margin: 1.5rem;
+}
+
+#tannhjul {
+    width: 3rem;
+    margin: 2rem;
+    cursor: pointer;
+    transition: 0.2s all ease;
+    background-clip: content-box;
+
+}
+
+#tannhjul:hover {
+    transform: scale(1.2);
+}
+
+
+.exit {
+    background-color: red;
+    border: thin black solid;
+    width: 2rem;
+    cursor: pointer;
+    height: 2rem;
+    text-align: center;
+}
+
+#settings {
+    position: fixed;
+    z-index: 2;
+    right: 1rem;
+    display: none;
+    transition: ease all 0.8s;
+    opacity: 0;
+}
+
+#settings p {
+    margin: 0;
+    background-color: white;
+    color: red;
+    border-radius: 1rem;
+    padding: 1rem;
+    border: thin solid black;
+    transition: ease all 0.3s;
+    cursor: pointer;
+
+}
+
+#settings p:hover {
+    background-color: gold;
+
+}
+
+#settings .angre {
+    background-color: red;
+    color: black;
+    display: none;
+    width: fit-content;
+    border-radius: 0 0 0.5rem 0.5rem;
+    height: 0.5rem;
+    text-transform: uppercase;
+    padding-top: 0.1rem;
+    margin-bottom: 0.1rem;
+    transition: 0.2s all ease;
+}
+
+/*-------------------------------------------- edit*/
+.edit,
+.edit section {
+    display: flex;
+    flex-direction: column;
+    margin: 2rem;
+}
+
+.edit label,
+.edit label input {
+    margin: 2px;
+    width: fit-content;
+}
+
+#tilfeldigsitater {
+    visibility: hidden;
+    margin: 0;
+    overflow: hidden;
+}
+
+#russeseksjon #egnesitater {
+    margin: 0;
+    overflow: hidden;
 }

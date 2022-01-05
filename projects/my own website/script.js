@@ -1,8 +1,4 @@
 window.addEventListener('load', init);
-
-const getIntroBoxes = document.querySelectorAll('#startskjerm .intro');
-
-const getRegistrerKnapper = document.querySelectorAll('#startskjerm .intro')[2].querySelectorAll('div.registrerKnapper');
 const getSamlerRegistreringsFelt = document.querySelector("#registrerSamler");
 const getRegistrerSamlerInputsEl = document.querySelectorAll('#registrerSamler input');
 const getRegistrerSamlerSubmitEl = document.querySelector('#submitSamler');
@@ -14,6 +10,10 @@ const getLoginnSubmitEl = document.querySelector('#loginnSamlerSubmit');
 
 const getBrukerSideEl = document.querySelector('#brukerSide');
 const getRemoveEls = document.querySelectorAll('.remove');
+const getBUTTONS = document.querySelectorAll('header .material-icons-two-tone');
+
+let loggInnVises;
+let registrerVises
 
 //Brukere 
 let nyeBrukere = [];
@@ -22,35 +22,52 @@ nyeBrukere = eksisterendeBrukere || [];
 let format = /^[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/;
 
 function init() {
-    getIntroBoxes[0].children[0].addEventListener('click', (event) => {
-        visibility(getIntroBoxes[1], event.target);
-    });
-    getIntroBoxes[0].children[1].addEventListener('click', (event) => {
-        visibility(getIntroBoxes[2], event.target);
-    });
+//EVENTLISTENERS
+    //Vis beskrivelse for ikonene
+    for (let icon of getBUTTONS) {
+        icon.addEventListener('mouseover', (event) => {
+            hovering(icon.getAttribute('data-text'), event.type);
+        })
 
-    //Vis registrerings- og loginn-felt
-    //vis registrering for samler
-    getRegistrerKnapper[1].addEventListener('click', () => {
-        showBox(getSamlerRegistreringsFelt);
+        icon.addEventListener('mouseout', (event) => {
+            hovering(icon.getAttribute('data-text'), event.type)
+        })
+    }
+
+    //Vis registreringsfelt
+    getBUTTONS[1].addEventListener('click', () => {
+        if(registrerVises !== true){
+            showBox(getSamlerRegistreringsFelt);
+            registrerVises = true;
+        }
+        if (loggInnVises == true) {
+            showBox(getLoginnSamlerFelt);
+            loggInnVises = false;
+        } 
         getSamlerRegistreringsFelt.scrollIntoView({
             behavior: 'smooth',
             block: 'center'
         });
     });
-    //vis registrering for russ
 
 
-    //vis loginn for samler
-    getLoginnSamlerKnapp.addEventListener('click', () => {
-        showBox(getLoginnSamlerFelt);
+    //Vis loginnfelt
+    getBUTTONS[0].addEventListener('click', () => {
+    
+        if (loggInnVises !== true) {
+            showBox(getLoginnSamlerFelt);
+            loggInnVises = true;
+        }
+        if(registrerVises == true){
+            showBox(getSamlerRegistreringsFelt);
+            registrerVises = false;
+        }
         getLoginnSamlerFelt.scrollIntoView({
             behavior: 'smooth',
             block: 'center'
         });
     })
-    //vis loginn for russ
-    //Registrer bruker eller loginn
+    
     //registrer samler
     getRegistrerSamlerSubmitEl.addEventListener('click', (event) => {
         event.preventDefault();
@@ -73,7 +90,7 @@ function init() {
 }
 
 function loginnSamler(brukernavn, passord) {
-    
+
     let loginn = false;
     if (brukernavn === "" || passord === "") {
         alert('Du må skrive inn både brukernavn og passord!')
@@ -86,38 +103,51 @@ function loginnSamler(brukernavn, passord) {
                 if (brukernavn.toString().toUpperCase() == bruker.brukernavn && passord.toString() == bruker.passord) {
                     loginn = true;
                     showBox(getBrukerSideEl);
-                    for(let rEl of getRemoveEls){
+                    for (let rEl of getRemoveEls) {
                         showBox(rEl);
                         document.body.style.height = "fit-content";
                     }
-                } 
+                }
             }
-            if(loginn == false){
+            if (loginn == false) {
                 alert('Brukernavn eller passord er feil, prøv på nytt!');
             }
         }
     }
 }
 
-function visibility(element, eventTarget) {
-    if (eventTarget.classList.contains('material-icons')) {
-        element.classList.toggle('visibility');
-        element.children[0].classList.toggle('currentVisible');
-        element.children[1].classList.toggle('currentVisible');
-        eventTarget.parentElement.classList.toggle('active');
-    } else {
+function hovering(string = "", event) {
 
-        element.classList.toggle('visibility');
-        element.children[0].classList.toggle('currentVisible');
-        element.children[1].classList.toggle('currentVisible');
-        eventTarget.classList.toggle('active');
+    let hoverEl = document.querySelector('#hovering');
+    if (event == "mouseover") {
+        hoverEl.classList.toggle('hovering');
+        hoverEl.innerText = string;
+    } else if (event == "mouseout") {
+        hoverEl.classList.toggle('hovering');
     }
+
 }
+
+//function visibility(element, eventTarget) {
+//    if (eventTarget.classList.contains('material-icons-two-tone')) {
+//        element.classList.toggle('visibility');
+//        element.children[0].classList.toggle('currentVisible');
+//        element.children[1].classList.toggle('currentVisible');
+//        eventTarget.parentElement.classList.toggle('active');
+//    } else {
+//
+//        element.classList.toggle('visibility');
+//        element.children[0].classList.toggle('currentVisible');
+//        element.children[1].classList.toggle('currentVisible');
+//        eventTarget.classList.toggle('active');
+//    }
+//}
+//
 
 function showBox(element) {
     element.classList.toggle('showBox');
 }
-//localStorage.clear();
+
 function registrerBruker(bruker = "russ" || "samler", brukernavn = "", passord = "") {
     let brukernavnet = brukernavn.toUpperCase();
     let registrer = true;

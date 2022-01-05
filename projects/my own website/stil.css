@@ -12,26 +12,12 @@
     }
 }
 /*Google materials*/
-.md1{
-    font-size: 1rem;
-}
-.md15{
-    font-size: 1.5rem;
-}
-.md2{
-    font-size: 2rem;
-}
-.md25{
-    font-size: 2.5rem;
-}
-.md3{
-    font-size: 3rem;
-}
-.md35{
-    font-size: 3.5rem;
-}
+.material-icons-two-tone.md-18 { font-size: 18px; }
+.material-icons-two-tone.md-24 { font-size: 24px; }
+.material-icons-two-tone.md-36 { font-size: 36px; }
+.material-icons-two-tone.md-48 { font-size: 3rem; }
 
-.material-icons {
+.material-icons-two-tone {
     font-family: 'Material Icons';
     font-weight: normal;
     font-style: normal;
@@ -43,6 +29,9 @@
     word-wrap: normal;
     white-space: nowrap;
     direction: ltr;
+    cursor: pointer;
+    transition:0.2s ease all ;
+    user-select: none;
   
     /* Support for all WebKit browsers. */
     -webkit-font-smoothing: antialiased;
@@ -56,6 +45,25 @@
     font-feature-settings: 'liga';
   }
 
+  .material-icons-two-tone:hover{
+      transform: translateY(-2%);
+      transform: scale(1.1);
+  }
+#hovering{
+    position: fixed;
+    color:black;
+    top:0;
+    left:50%;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: var(--2);
+    padding:0.2rem;
+    transition:ease all 0.2s;
+
+}
+.hovering{
+    opacity: 0 !important;
+}
 body{
     background:white;
     color:white;
@@ -70,9 +78,37 @@ body{
     justify-content: space-between;
 }
 
+#top{
+    color:black;
+    padding:0;
+    margin:0;
+}
+#top *{
+    padding:0.1rem;
+    margin:0;
+    
+}
+#top h1{
+    font-size: 1rem;
+}
+#top h2{
+    font-size: 0.8rem;
+}
+header{
+    color:black;
+    width:90vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    flex-direction: row;
+    
+}
+
 #startskjerm{
     display: flex;
     align-items: stretch;
+    align-content: center;
     justify-content: center;
     flex-direction: column;
     user-select: none;
@@ -84,16 +120,20 @@ body{
     display: flex;
     flex-direction: row;
     padding:2rem;
+    transition: 0.2 ease all;
 }
 
 .intro div{
     padding:2rem;
     background:var(--4);
-    margin:1rem;
+    margin:0.1rem;
     
     height: fit-content;
     text-align:center;
-    width:20rem;
+    align-content:center;
+    align-items:center;
+    width:10rem;
+    height:8rem;
 }
 
 table, tr, th, td{
@@ -135,12 +175,18 @@ footer div{
 }
 #loginnEllerRegistrerSkjerm{
     color:black;
+    width:90vw;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
 }
 
 #brukerSide{
     color:red;
 }
 .showBox{
+    opacity: 0;
     height:0.001rem !important;
     width:0.001rem !important;
     overflow: hidden !important;

@@ -121,7 +121,7 @@ function init() {
         if (getRegistrerSamlerInputsEl[0].value.toString().match(format) || getRegistrerSamlerInputsEl[1].value.toString().match(format)) {
             alert('Brukernavn eller passord kan ikke inneholde spesielle tegn, kun bokstaver og tall.');
         } else if(/\s/.test(getRegistrerSamlerInputsEl[0].value)){
-            alert('Du kan ikke ha mellomrom i brukernavnet ditt!')
+            alert('Du kan ikke ha mellomrom i brukernavnet ditt!');
         } else{
             registrerBruker("samler", getRegistrerSamlerInputsEl[0].value, getRegistrerSamlerInputsEl[1].value);
             alerted(`Brukeren er registrert! \nDu kan nå logge inn med brukernavn:! ${getRegistrerSamlerInputsEl[0].value}`);

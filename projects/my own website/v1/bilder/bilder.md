@@ -1,0 +1,1 @@
+Alle bilder her er lovlig å gjenbruke cc

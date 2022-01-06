@@ -49,14 +49,14 @@ const getRussekort = document.querySelector('.container');
 
 
 //RusseINFO
-    //Tekst
+//Tekst
 let getSkole = document.querySelector('.header');
 let getRussetekst = document.querySelector('.russ');
 let getNavn = document.querySelector('.navn');
 let getAdresse = document.querySelector('.adresse');
 let getTlf = document.querySelector('.tlf');
 let getGruppe = document.querySelector('.gruppe');
-    //Bilder
+//Bilder
 let getRusselogoen = document.querySelector('#russelogoen');
 
 
@@ -64,6 +64,9 @@ let russekorthentet = false;
 
 const printButton = document.querySelector('#buttonPrint');
 
+//Russekort SAMLINGEN og EGET KORT
+let getKortKode = document.querySelector('#deleRussekort');
+let getHentRussekort = document.querySelector('#lagretRussekort');
 
 //alert
 const getAlertBox = document.querySelector('#alerted');
@@ -80,7 +83,8 @@ if (eksisterendeBrukere) {
     nyeBrukere = eksisterendeBrukere || [];
 }
 let aktivBruker;
-let format = /^[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/;
+let aktivBrukerObjekt;
+const format = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
 
 function init() {
     //EVENTLISTENERS
@@ -166,13 +170,8 @@ function init() {
     //registrer samler
     getRegistrerSamlerSubmitEl.addEventListener('click', (event) => {
         event.preventDefault();
-        if (getRegistrerSamlerInputsEl[0].value.toString().match(format) || getRegistrerSamlerInputsEl[1].value.toString().match(format)) {
-            alert('Brukernavn eller passord kan ikke inneholde spesielle tegn, kun bokstaver og tall.');
-        } else if (/\s/.test(getRegistrerSamlerInputsEl[0].value)) {
-            alert('Du kan ikke ha mellomrom i brukernavnet ditt!');
-        } else {
-            registrerBruker("samler", getRegistrerSamlerInputsEl[0].value, getRegistrerSamlerInputsEl[1].value);
-        }
+        registrerBruker("samler", getRegistrerSamlerInputsEl[0].value, getRegistrerSamlerInputsEl[1].value);
+        
     })
 
     //loginn samler
@@ -187,7 +186,7 @@ function init() {
             russeSide(i);
         })
     }
-
+    console.log('%c Brukere', "color:green;")
     console.log(JSON.parse(localStorage.getItem("brukere")));
 
 }
@@ -209,21 +208,19 @@ function russeSide(index) {
         getRussesider[1].classList.add('showBox');
     }
 }
-
 function loginn(brukernavn, passord) {
 
     let loginn = false;
     if (brukernavn === "" || passord === "") {
         alert('Du må skrive inn både brukernavn og passord!')
-    } else {
-
-        if (brukernavn.match(format) || passord.match(format)) {
+    } else if(brukernavn.match(format) || passord.match(format)){
             alert('Brukernavn og passord kan bare inneholde bokstaver og tall!');
-        } else {
+    } else {
             for (let bruker of JSON.parse(localStorage.getItem("brukere"))) {
                 if (brukernavn.toString().toUpperCase() == bruker.brukernavn && passord.toString() == bruker.passord) {
                     loginn = true;
                     aktivBruker = bruker.brukernavn;
+                    aktivBrukerObjekt = bruker;
                     showBox(getBrukerSideEl);
                     showBox(getDinProfilKnapp);
                     showBox(getLoggUtKnapp); //fortsett her
@@ -232,6 +229,7 @@ function loginn(brukernavn, passord) {
                         document.body.style.height = "fit-content";
                     }
                     alerted("Du er nå logget inn!");
+                    console.log('%c Aktiv bruker:', "color:green;")
                     console.log(aktivBruker);
                     hentRussekortet();
                     hentDittRussekortSide();
@@ -242,8 +240,9 @@ function loginn(brukernavn, passord) {
                 alert('Brukernavn eller passord er feil, prøv på nytt!');
             }
         }
-    }
 }
+
+
 function hovering(string = "", event, farge = "") {
 
     let hoverEl = document.querySelector('#hovering');
@@ -278,36 +277,51 @@ function showBox(element) {
 function registrerBruker(bruker = "russ" || "samler", brukernavn = "", passord = "") {
     let brukernavnet = brukernavn.toUpperCase();
     let registrer = true;
-    if (window.localStorage.length == 0 && registrer == true) {
-        nyeBrukere.push({
-            "brukerstatus": bruker,
-            "brukernavn": brukernavnet,
-            "passord": passord
-        });
-        alerted(`Brukeren er registrert! \nDu kan nå logge inn med brukernavn:! ${getRegistrerSamlerInputsEl[0].value}`);
+
+    let brukerID = [];
+    for (let i = 0; i < brukernavnet.length; i++) {
+        brukerID.push(brukernavnet.charCodeAt(i));
+    }
+    brukerID = brukerID.toString().replace(/,/gi, "");
+    if (format.test(getRegistrerSamlerInputsEl[0].value) || format.test(getRegistrerSamlerInputsEl[1].value)) {
+        alert('Brukernavn eller passord kan ikke inneholde spesielle tegn eller æøå, kun bokstaver og tall.');
+    } else if (/\s/.test(getRegistrerSamlerInputsEl[0].value) || /\s/.test(getRegistrerSamlerInputsEl[1].value)) {
+        alert('Du kan ikke ha mellomrom i brukernavnet eller passordet ditt!');
     } else {
-        for (let i = 0; i < (JSON.parse(window.localStorage.getItem('brukere'))).length; i++) {
-            if (JSON.parse(window.localStorage.getItem('brukere'))[i].brukernavn === brukernavnet) {
-                alert('Det eksisterer allerede en bruker med dette brukernavnet.');
-                registrer = false;
-            }
 
-        }
-        if (registrer === true) {
-
+        if (window.localStorage.length == 0 && registrer == true) {
             nyeBrukere.push({
                 "brukerstatus": bruker,
                 "brukernavn": brukernavnet,
-                "passord": passord
+                "passord": passord,
+                "id": brukerID
             });
-            alerted(`Brukeren er registrert! \nDu kan nå logge inn med brukernavn:! ${getRegistrerSamlerInputsEl[0].value}`);
+            alerted(`Brukeren er registrert! \nDu kan nå logge inn med brukernavn:\n ${getRegistrerSamlerInputsEl[0].value}`);
+        } else {
+            for (let i = 0; i < (JSON.parse(window.localStorage.getItem('brukere'))).length; i++) {
+                if (JSON.parse(window.localStorage.getItem('brukere'))[i].brukernavn === brukernavnet) {
+                    alert('Det eksisterer allerede en bruker med dette brukernavnet.');
+                    registrer = false;
+                }
+
+            }
+            if (registrer === true) {
+
+                nyeBrukere.push({
+                    "brukerstatus": bruker,
+                    "brukernavn": brukernavnet,
+                    "passord": passord,
+                    "id": brukerID
+                });
+                alerted(`Brukeren er registrert! \nDu kan nå logge inn med brukernavn:! ${getRegistrerSamlerInputsEl[0].value}`);
+            }
         }
+
+        window.localStorage.setItem("brukere", JSON.stringify(nyeBrukere));
+        console.log(JSON.parse(window.localStorage.getItem('brukere')));
+
+
     }
-
-    window.localStorage.setItem("brukere", JSON.stringify(nyeBrukere));
-    console.log(JSON.parse(window.localStorage.getItem('brukere')));
-
-
 }
 
 function alerted(string = "") {
@@ -342,18 +356,32 @@ function hentRussekortet() {
         console.log(JSON.parse(window.localStorage.getItem(`${aktivBruker}-farge`)));
         getRussekort.innerHTML = JSON.parse(window.localStorage.getItem(`${aktivBruker}-kort`));
         getRussekort.style.backgroundColor = JSON.parse(window.localStorage.getItem(`${aktivBruker}-farge`));
-        if (JSON.parse(window.localStorage.getItem(`${aktivBruker}-farge`)) == "black") {
+        if (JSON.parse(window.localStorage.getItem(`${aktivBruker}-farge`)) == "black" || JSON.parse(window.localStorage.getItem(`${aktivBruker}-farge`)) == "blue") {
             getRussekort.style.color = "white";
         }
         russekorthentet = true;
-    } else if(russekorthentet == true){
+    } else if (russekorthentet == true) {
         getRussekort.innerHTML;
     }
 
 }
 
 function hentDittRussekortSide() {
-    console.log('h');
+    getKortKode.innerHTML = aktivBrukerObjekt.id;
+    if (window.localStorage.getItem(`${aktivBruker}-kort`) && window.localStorage.getItem(`${aktivBruker}-farge`)) {
+        //TODO: radio input checked
+        console.log(JSON.parse(window.localStorage.getItem(`${aktivBruker}-farge`)));
+        getHentRussekort.innerHTML = JSON.parse(window.localStorage.getItem(`${aktivBruker}-kort`));
+        getHentRussekort.style.backgroundColor = JSON.parse(window.localStorage.getItem(`${aktivBruker}-farge`));
+        if (JSON.parse(window.localStorage.getItem(`${aktivBruker}-farge`)) == "black" || JSON.parse(window.localStorage.getItem(`${aktivBruker}-farge`)) == "blue") {
+            getHentRussekort.style.color = "white";
+        } else{
+            getHentRussekort.style.color = "black";
+        }
+        russekorthentet = true;
+    } else if (russekorthentet == true) {
+        getRussekort.innerHTML;
+    }
 }
 
 function hentRussekortSamlingen() {
@@ -393,11 +421,15 @@ function randomNumber(max) {
 //lagredeRussekortArray = eksisterendeRussekort || [];
 
 function lagreRussekort(russekortet, farge) {
-    console.log([russekortet]);
     window.localStorage.setItem(`${aktivBruker}-kort`, JSON.stringify(russekortet.innerHTML));
     window.localStorage.setItem(`${aktivBruker}-farge`, JSON.stringify(farge));
+
+    alerted("Lagret russekort!");
+    console.log("%c Lagret kort og css", "color:green;");
     console.log(JSON.parse(window.localStorage.getItem(`${aktivBruker}-kort`)));
     console.log(JSON.parse(window.localStorage.getItem(`${aktivBruker}-farge`)));
+    
+    hentDittRussekortSide();
 }
 
 function visibility(element) {
@@ -406,8 +438,12 @@ function visibility(element) {
 }
 
 function updateRusseaar() {
-    getRussetekst = document.querySelector('.russ');
-    getRussetekst.innerHTML = `${russ}russ ${getEndreAar_input.value}`;
+    if(getEndreAar_input.value.match(format)){
+        alert('Skriv inn et årstall');
+    } else {
+        getRussetekst = document.querySelector('.russ');
+        getRussetekst.innerHTML = `${russ}russ ${getEndreAar_input.value}`;
+    }
 };
 
 
@@ -421,21 +457,20 @@ getSaveButton.addEventListener('click', () => {
 
     console.log(dennefargen);
     lagreRussekort(getRussekort, dennefargen);
-    alerted("Lagret russekortet!");
 });
 
 
-function hentLagredeRussekort() {
-    console.log(lagredeRussekortArray);
-    for (let i = 0; i < lagredeRussekortArray.length; i++) {
-        let newCarddesign = document.createElement('div');
-        newCarddesign.classList.add('container');
-        newCarddesign.innerHTML = lagredeRussekortArray[i];
-        newCarddesign.style.transform = "scale(0.5)";
-        getLagredeRussekortBox.appendChild(newCarddesign);
-
-    }
-}
+//function hentLagredeRussekort() {
+//    console.log(lagredeRussekortArray);
+//    for (let i = 0; i < lagredeRussekortArray.length; i++) {
+//        let newCarddesign = document.createElement('div');
+//        newCarddesign.classList.add('container');
+//        newCarddesign.innerHTML = lagredeRussekortArray[i];
+//        newCarddesign.style.transform = "scale(0.5)";
+//        getLagredeRussekortBox.appendChild(newCarddesign);
+//
+//    }
+//}
 
 document.body.style.opacity = "1";
 
@@ -494,12 +529,12 @@ getBilde.addEventListener('change', function () {
             reader.readAsDataURL(this.files[0]);
             reader.addEventListener("load", () => {
                 try {
-                    
-                localStorage.setItem("myRecentImage", reader.result);
+
+                    localStorage.setItem("myRecentImage", reader.result);
 
                 } catch (error) {
                     alert("Bilde var for stort til å lagres for neste gang, \n så du må bare laste det opp på nytt før du bruker det");
-                
+
                     localStorage.setItem("myRecentImage", reader.result);
                 }
                 let currentRecentImage = localStorage.getItem("myRecentImage");
@@ -521,12 +556,17 @@ getBilde.addEventListener('change', function () {
 
 getNavnInput.addEventListener('input', () => {
     getNavn = document.querySelector('.navn');
+    if(getNavnInput.value.match(format)){
+        alert('Kun bokstaver og tall!');
+    } else {
+        
     getNavn.setAttribute('data-text', getNavnInput.value)
     getNavn.innerHTML = "<br>" + getNavn.getAttribute('data-text');
     if (getNavnInput.value.length > 15) {
         getNavn.style.fontSize = "1.1rem";
     } else {
         getNavn.style.fontSize = "";
+    }
     }
 })
 
@@ -563,10 +603,10 @@ for (let f of getFargeVelger) {
         if (f.value === "black") {
             getRussekort.removeAttribute("style");
             getRussekort.setAttribute("style", "background:black; color:white;");
-        } else {
-            getRussekort.style.color = "black";
+        } else if(f.value === "blue"){
+            getRussekort.removeAttribute("style");
+            getRussekort.setAttribute("style", "background:blue; color:white;");
         }
-
     })
 }
 

@@ -14,13 +14,14 @@ const getBUTTONS = document.querySelectorAll('header .material-icons-two-tone');
 
 //Russeapplikasjon
 const getDinProfilKnapp = document.querySelector('#dinProfil');
+const getLoggUtKnapp = document.querySelector('#loggUtKnapp');
 const getRusseSeksjon = document.querySelector('#russe_seksjon');
 const getBrukerSideIkoner = document.querySelectorAll('#brukerSide .material-icons-two-tone');
 const getRussesideIkoner = document.querySelectorAll('#russe_seksjon .material-icons-two-tone');
 const getRussesider = document.querySelectorAll('.russeside');
 //alert
 const getAlertBox = document.querySelector('#alerted');
-
+//display loginn og registrer
 let loggInnVises;
 let registrerVises
 
@@ -30,11 +31,12 @@ const eksisterendeBrukere = JSON.parse(window.localStorage.getItem('brukere'));
 if (eksisterendeBrukere) {
     nyeBrukere = eksisterendeBrukere || [];
 }
+let aktivBruker;
 let format = /^[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/;
 
 function init() {
     //EVENTLISTENERS
-    //Vis beskrivelse for ikonene
+    //Vis beskrivelse for ikonene med sånn alert greie
     smoothAnimation(document.querySelector("#top"));
     for (let icon of getBUTTONS) {
         icon.addEventListener('mouseover', (event) => {
@@ -118,8 +120,11 @@ function init() {
         event.preventDefault();
         if (getRegistrerSamlerInputsEl[0].value.toString().match(format) || getRegistrerSamlerInputsEl[1].value.toString().match(format)) {
             alert('Brukernavn eller passord kan ikke inneholde spesielle tegn, kun bokstaver og tall.');
-        } else {
+        } else if(/\s/.test(getRegistrerSamlerInputsEl[0].value)){
+            alert('Du kan ikke ha mellomrom i brukernavnet ditt!')
+        } else{
             registrerBruker("samler", getRegistrerSamlerInputsEl[0].value, getRegistrerSamlerInputsEl[1].value);
+            alerted(`Brukeren er registrert! \nDu kan nå logge inn med brukernavn:! ${getRegistrerSamlerInputsEl[0].value}`);
         }
     })
 
@@ -170,13 +175,17 @@ function loginnSamler(brukernavn, passord) {
             for (let bruker of JSON.parse(localStorage.getItem("brukere"))) {
                 if (brukernavn.toString().toUpperCase() == bruker.brukernavn && passord.toString() == bruker.passord) {
                     loginn = true;
+                    aktivBruker = bruker.brukernavn;
                     showBox(getBrukerSideEl);
                     showBox(getDinProfilKnapp);
+                    showBox(getLoggUtKnapp);//fortsett her
                     for (let rEl of getRemoveEls) {
                         showBox(rEl);
                         document.body.style.height = "fit-content";
                     }
                     alerted("Du er nå logget inn!");
+                    console.log(aktivBruker);
+                    hentRussekortet();
                 }
             }
             if (loginn == false) {
@@ -304,15 +313,20 @@ function alerted(string = "") {
 
 const getRussebilde = document.querySelector('#russebilde');
 const getRussekort = document.querySelector('.container');
-if (window.localStorage.getItem("lagretRussekort")) {
+function hentRussekortet() {
+    
+if (window.localStorage.getItem(`${aktivBruker}-kort`) && window.localStorage.getItem(`${aktivBruker}-farge`)) {
     //TODO: radio input checked
-
-    getRussekort.innerHTML = JSON.parse(window.localStorage.getItem("lagretRussekort"));
-    getRussekort.style.backgroundColor = JSON.parse(window.localStorage.getItem("fargen"));
-    if (JSON.parse(window.localStorage.getItem("fargen")) == "black") {
+    console.log(JSON.parse(window.localStorage.getItem(`${aktivBruker}-farge`)));
+    getRussekort.innerHTML = JSON.parse(window.localStorage.getItem(`${aktivBruker}-kort`));
+    getRussekort.style.backgroundColor = JSON.parse(window.localStorage.getItem(`${aktivBruker}-farge`));
+    if (JSON.parse(window.localStorage.getItem(`${aktivBruker}-farge`)) == "black") {
         getRussekort.style.color = "white";
     }
 }
+
+}
+
 
 function printDiv() {
     duplicate(document.querySelector('.container'), 10); //funksjon som er hentet fra modul
@@ -347,9 +361,10 @@ function randomNumber(max) {
 
 function lagreRussekort(russekortet, farge) {
     console.log([russekortet]);
-    window.localStorage.setItem("lagretRussekort", JSON.stringify(russekortet.innerHTML));
-    window.localStorage.setItem("fargen", JSON.stringify(farge));
-    console.log(JSON.parse(window.localStorage.getItem("lagretRussekort")));
+    window.localStorage.setItem(`${aktivBruker}-kort`, JSON.stringify(russekortet.innerHTML));
+    window.localStorage.setItem(`${aktivBruker}-farge`, JSON.stringify(farge));
+    console.log(JSON.parse(window.localStorage.getItem(`${aktivBruker}-kort`)));
+    console.log(JSON.parse(window.localStorage.getItem(`${aktivBruker}-farge`)));
 }
 
 function visibility(element) {
@@ -377,7 +392,7 @@ getSaveButton.addEventListener('click', () => {
 });
 
 getLagredeRussekortKnapp.addEventListener('click', () => {
-    hentLagredeRussekort();
+    hentLagredeRussekort();//fortsett her
     visibility(getLagredeRussekortBox);
 });
 

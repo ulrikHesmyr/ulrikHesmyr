@@ -72,28 +72,6 @@ if (eksisterendeMynter) {
 }
 
 window.addEventListener('keydown', (event) => {
-    bevegPad(event);
-    //console.log(posX);
-    
-    window.requestAnimationFrame(bevegPad(event));
-})
-
-
-function init() {
-    ctx = getAnimertCanvas.getContext('2d');
-
-    blank();
-    drawSquare();
-    drawPad();
-
-    window.requestAnimationFrame(anim);
-    
-    updateScore();
-
-}
-
-function bevegPad(event) {
-    blank();
     if (event.key == "ArrowLeft" || "ArrowRight" || "ArrowUp" || "ArrowDown") {
         event.preventDefault();
     }
@@ -104,31 +82,34 @@ function bevegPad(event) {
         } else if (spill == false) {
             display(getPauseEl);
             spill = true;
+            window.requestAnimationFrame(anim);
         }
     }
 
     event.key == "ArrowLeft" ? posX -= levels[level].posUp : posX;
     event.key == "ArrowRight" ? posX += levels[level].posUp : posX;
-
+    //Paden går helt rundt
     if (posX >= getAnimertCanvas.width) {
         posX = -10;
     } else if (posX <= -100) {
         posX = getAnimertCanvas.width;
     }
-    drawPad();
-    if(spill == true){
-        
-    window.requestAnimationFrame(bevegPad(event));
-    }
+    //console.log(posX);
+
+})
+
+
+function init() {
+    ctx = getAnimertCanvas.getContext('2d');
+
+    blank();
+    drawSquare();
+
+    window.requestAnimationFrame(anim);
+    updateScore();
+
 }
 
-function drawPad(){
-    
-    ctx.fillStyle = "black";
-    ctx.fillRect(posX, posY, 100, 10);
-    ctx.fill();
-    ctx.stroke();
-}
 function display(element) {
     element.classList.toggle('visible');
 }
@@ -180,12 +161,14 @@ function blank() {
 function drawSquare() {
 
     //ctx.drawImage(DVDbilde, rectX, rectY, 50, 50);
-    
-    ctx.fillStyle = "black";
+    ctx.fillStyle = "red";
     ctx.beginPath();
     ctx.arc(rectX, rectY, 20, 0, Math.PI * 2, true);
-    ctx.stroke();
     ctx.fill();
+    ctx.stroke();
+    ctx.fillStyle = "black";
+    ctx.fillRect(posX, posY, 100, 10);
+    ctx.stroke();
 
 }
 
@@ -195,7 +178,6 @@ function anim() {
 
     rectX += stepX;
     rectY += stepY;
-
 
     rectX > getAnimertCanvas.width - 20 ? stepX *= -1 : rectX;
     rectX < 20 ? stepX *= -1 : rectX;

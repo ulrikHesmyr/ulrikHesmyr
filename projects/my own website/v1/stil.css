@@ -5,6 +5,7 @@
     --4:#e46161;
     --font1:'Be Vietnam Pro', sans-serif;
     --font2: 'Exo', sans-serif;
+    --font3:'Bitter', serif;
 }
 
 @media screen and (max-width:660px){
@@ -100,8 +101,11 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    user-select: none;
 }
-
+strong{
+    font-family: var(--font3);
+}
 #top{
     color:black;
     padding:0;
@@ -228,6 +232,7 @@ footer div{
 }
 
 /*Russekortet-stilark*/
+
 
 .container {
     width: 32em;
@@ -457,6 +462,21 @@ footer div{
 }
 
 /*-------------------------------------------- edit*/
+@media screen and (min-width:932px){
+    
+.edit{
+    max-width:30%;
+}
+#russekortet{
+    position:absolute;
+    right:2rem;
+    top:20rem;
+}
+}
+.edit{
+    flex-direction: row;
+}
+
 .edit,
 .edit section {
     display: flex;

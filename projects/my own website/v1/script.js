@@ -19,11 +19,59 @@ const getRusseSeksjon = document.querySelector('#russe_seksjon');
 const getBrukerSideIkoner = document.querySelectorAll('#brukerSide .material-icons-two-tone');
 const getRussesideIkoner = document.querySelectorAll('#russe_seksjon .material-icons-two-tone');
 const getRussesider = document.querySelectorAll('.russeside');
+
+const getAdresseInput = document.querySelector('#adresse_input');
+const getTlfInput = document.querySelector('#tlf_input');
+const getGruppeInput = document.querySelector('#gruppe_input');
+const getSkoleInput = document.querySelector('#skole_input');
+const getNavnInput = document.querySelector('#navn_input');
+
+const getSitatselect = document.querySelector('select');
+const getTilfeldigSitatKnapp = document.querySelector('#tilfeldigsitater label button');
+const getTilfeldigSitatOmraade = document.querySelector('#tilfeldigsitater');
+const getTilfeldigSitatFelt = document.querySelector('.tilfeldigSitat');
+const getEgne = document.querySelector('#egnesitater');
+const getFooter = document.querySelector('.footer');
+
+
+let getMidstill = document.querySelector('#midtstill');
+let getAngre = document.querySelectorAll('.angre');
+let getFjernRussegruppe = document.querySelector('#fjernRussegruppe');
+let getRussegreier = document.querySelectorAll('.russe');
+
+
+
+
+
+const getRussebilde = document.querySelector('#russebilde');
+const getRussekort = document.querySelector('.container');
+
+
+
+//RusseINFO
+    //Tekst
+let getSkole = document.querySelector('.header');
+let getRussetekst = document.querySelector('.russ');
+let getNavn = document.querySelector('.navn');
+let getAdresse = document.querySelector('.adresse');
+let getTlf = document.querySelector('.tlf');
+let getGruppe = document.querySelector('.gruppe');
+    //Bilder
+let getRusselogoen = document.querySelector('#russelogoen');
+
+
+let russekorthentet = false;
+
+const printButton = document.querySelector('#buttonPrint');
+
+
 //alert
 const getAlertBox = document.querySelector('#alerted');
+
 //display loginn og registrer
 let loggInnVises;
 let registrerVises
+
 
 //Brukere 
 let nyeBrukere = [];
@@ -56,7 +104,7 @@ function init() {
             hovering(icon.getAttribute('data-text'), event.type)
         })
     }
-    for(let icon of getRussesideIkoner){
+    for (let icon of getRussesideIkoner) {
         icon.addEventListener('mouseover', (event) => {
             hovering(icon.getAttribute('data-text'), event.type)
         })
@@ -65,17 +113,17 @@ function init() {
             hovering(icon.getAttribute('data-text'), event.type)
         })
     }
-    getSaveButton.addEventListener('mouseover', (event)=>{
+    getSaveButton.addEventListener('mouseover', (event) => {
         hovering(getSaveButton.getAttribute('data-text'), event.type);
     })
-    getSaveButton.addEventListener('mouseout', (event)=>{
+    getSaveButton.addEventListener('mouseout', (event) => {
         hovering(getSaveButton.getAttribute('data-text'), event.type);
     })
 
-    printButton.addEventListener('mouseover', (event)=>{
+    printButton.addEventListener('mouseover', (event) => {
         hovering(printButton.getAttribute('data-text'), event.type);
     })
-    printButton.addEventListener('mouseout', (event)=>{
+    printButton.addEventListener('mouseout', (event) => {
         hovering(printButton.getAttribute('data-text'), event.type);
     })
 
@@ -120,23 +168,22 @@ function init() {
         event.preventDefault();
         if (getRegistrerSamlerInputsEl[0].value.toString().match(format) || getRegistrerSamlerInputsEl[1].value.toString().match(format)) {
             alert('Brukernavn eller passord kan ikke inneholde spesielle tegn, kun bokstaver og tall.');
-        } else if(/\s/.test(getRegistrerSamlerInputsEl[0].value)){
+        } else if (/\s/.test(getRegistrerSamlerInputsEl[0].value)) {
             alert('Du kan ikke ha mellomrom i brukernavnet ditt!');
-        } else{
+        } else {
             registrerBruker("samler", getRegistrerSamlerInputsEl[0].value, getRegistrerSamlerInputsEl[1].value);
-            alerted(`Brukeren er registrert! \nDu kan nå logge inn med brukernavn:! ${getRegistrerSamlerInputsEl[0].value}`);
         }
     })
 
     //loginn samler
     getLoginnSubmitEl.addEventListener('click', (event) => {
         event.preventDefault();
-        loginnSamler(getLoginnSamlerInputsEl[0].value, getLoginnSamlerInputsEl[1].value);
+        loginn(getLoginnSamlerInputsEl[0].value, getLoginnSamlerInputsEl[1].value);
     })
 
     //vis sider på "din side"
-    for(let i = 0; i < getBrukerSideIkoner.length; i++){
-        getBrukerSideIkoner[i].addEventListener('click', ()=>{
+    for (let i = 0; i < getBrukerSideIkoner.length; i++) {
+        getBrukerSideIkoner[i].addEventListener('click', () => {
             russeSide(i);
         })
     }
@@ -147,22 +194,23 @@ function init() {
 
 //Funksjoner------------ -------------------- ------------------------ ------------------
 
-function russeSide(index){
-    if(index == 0){
+function russeSide(index) {
+    if (index == 0) {
         getRussesider[index].classList.remove('showBox');
         getRussesider[1].classList.add('showBox');
         getRussesider[2].classList.add('showBox');
-    } else if(index == 1){
+    } else if (index == 1) {
         getRussesider[index].classList.remove('showBox');
         getRussesider[0].classList.add('showBox');
         getRussesider[2].classList.add('showBox');
-    } else if(index == 2){
+    } else if (index == 2) {
         getRussesider[index].classList.remove('showBox');
         getRussesider[0].classList.add('showBox');
         getRussesider[1].classList.add('showBox');
     }
 }
-function loginnSamler(brukernavn, passord) {
+
+function loginn(brukernavn, passord) {
 
     let loginn = false;
     if (brukernavn === "" || passord === "") {
@@ -178,7 +226,7 @@ function loginnSamler(brukernavn, passord) {
                     aktivBruker = bruker.brukernavn;
                     showBox(getBrukerSideEl);
                     showBox(getDinProfilKnapp);
-                    showBox(getLoggUtKnapp);//fortsett her
+                    showBox(getLoggUtKnapp); //fortsett her
                     for (let rEl of getRemoveEls) {
                         showBox(rEl);
                         document.body.style.height = "fit-content";
@@ -186,6 +234,8 @@ function loginnSamler(brukernavn, passord) {
                     alerted("Du er nå logget inn!");
                     console.log(aktivBruker);
                     hentRussekortet();
+                    hentDittRussekortSide();
+                    hentRussekortSamlingen();
                 }
             }
             if (loginn == false) {
@@ -194,7 +244,6 @@ function loginnSamler(brukernavn, passord) {
         }
     }
 }
-
 function hovering(string = "", event, farge = "") {
 
     let hoverEl = document.querySelector('#hovering');
@@ -222,22 +271,6 @@ function smoothAnimation(element) {
     }, 700)
 }
 
-//function visibility(element, eventTarget) {
-//    if (eventTarget.classList.contains('material-icons-two-tone')) {
-//        element.classList.toggle('visibility');
-//        element.children[0].classList.toggle('currentVisible');
-//        element.children[1].classList.toggle('currentVisible');
-//        eventTarget.parentElement.classList.toggle('active');
-//    } else {
-//
-//        element.classList.toggle('visibility');
-//        element.children[0].classList.toggle('currentVisible');
-//        element.children[1].classList.toggle('currentVisible');
-//        eventTarget.classList.toggle('active');
-//    }
-//}
-//
-
 function showBox(element) {
     element.classList.toggle('showBox');
 }
@@ -251,6 +284,7 @@ function registrerBruker(bruker = "russ" || "samler", brukernavn = "", passord =
             "brukernavn": brukernavnet,
             "passord": passord
         });
+        alerted(`Brukeren er registrert! \nDu kan nå logge inn med brukernavn:! ${getRegistrerSamlerInputsEl[0].value}`);
     } else {
         for (let i = 0; i < (JSON.parse(window.localStorage.getItem('brukere'))).length; i++) {
             if (JSON.parse(window.localStorage.getItem('brukere'))[i].brukernavn === brukernavnet) {
@@ -266,6 +300,7 @@ function registrerBruker(bruker = "russ" || "samler", brukernavn = "", passord =
                 "brukernavn": brukernavnet,
                 "passord": passord
             });
+            alerted(`Brukeren er registrert! \nDu kan nå logge inn med brukernavn:! ${getRegistrerSamlerInputsEl[0].value}`);
         }
     }
 
@@ -279,14 +314,14 @@ function alerted(string = "") {
     getAlertBox.innerText = string;
     showBox(getAlertBox);
     getAlertBox.style.opacity = "0";
-    setTimeout(()=>{
-    getAlertBox.style.opacity = "1";
-    setTimeout(()=>{
-        getAlertBox.style.opacity = "0";
-        setTimeout(()=>{
-            showBox(getAlertBox);
-        }, 1000)
-    }, 2000)
+    setTimeout(() => {
+        getAlertBox.style.opacity = "1";
+        setTimeout(() => {
+            getAlertBox.style.opacity = "0";
+            setTimeout(() => {
+                showBox(getAlertBox);
+            }, 1000)
+        }, 2000)
     }, 100)
 }
 
@@ -300,31 +335,29 @@ function alerted(string = "") {
 
 //----------------------------------------------------------------------------------------------------
 
-//function actionMessage(message) {
-//    let actionMessageEl = document.querySelector('.actionMessage');
-//    actionMessageEl.innerText = message;
-//    actionMessageEl.classList.toggle('actionMessage');
-//    actionMessageEl.classList.toggle('show');
-//    setTimeout(() => {
-//        actionMessageEl.classList.toggle('show');
-//        actionMessageEl.classList.toggle('actionMessage');
-//    }, 5000)
-//}
-
-const getRussebilde = document.querySelector('#russebilde');
-const getRussekort = document.querySelector('.container');
 function hentRussekortet() {
-    
-if (window.localStorage.getItem(`${aktivBruker}-kort`) && window.localStorage.getItem(`${aktivBruker}-farge`)) {
-    //TODO: radio input checked
-    console.log(JSON.parse(window.localStorage.getItem(`${aktivBruker}-farge`)));
-    getRussekort.innerHTML = JSON.parse(window.localStorage.getItem(`${aktivBruker}-kort`));
-    getRussekort.style.backgroundColor = JSON.parse(window.localStorage.getItem(`${aktivBruker}-farge`));
-    if (JSON.parse(window.localStorage.getItem(`${aktivBruker}-farge`)) == "black") {
-        getRussekort.style.color = "white";
+
+    if (window.localStorage.getItem(`${aktivBruker}-kort`) && window.localStorage.getItem(`${aktivBruker}-farge`) && russekorthentet == false) {
+        //TODO: radio input checked
+        console.log(JSON.parse(window.localStorage.getItem(`${aktivBruker}-farge`)));
+        getRussekort.innerHTML = JSON.parse(window.localStorage.getItem(`${aktivBruker}-kort`));
+        getRussekort.style.backgroundColor = JSON.parse(window.localStorage.getItem(`${aktivBruker}-farge`));
+        if (JSON.parse(window.localStorage.getItem(`${aktivBruker}-farge`)) == "black") {
+            getRussekort.style.color = "white";
+        }
+        russekorthentet = true;
+    } else if(russekorthentet == true){
+        getRussekort.innerHTML;
     }
+
 }
 
+function hentDittRussekortSide() {
+    console.log('h');
+}
+
+function hentRussekortSamlingen() {
+    console.log('hh');
 }
 
 
@@ -344,7 +377,7 @@ function duplicate(element, amount) {
         newArray[index].style.gridRow = `${index}/ span 1`;
         if (index > 5) {
             newArray[index].style.gridColumn = `2/ span 1`;
-            newArray[index].style.gridRow = `${index -3}/ span 1`;
+            newArray[index].style.gridRow = `${index -4}/ span 1`;
         }
 
     }
@@ -373,13 +406,13 @@ function visibility(element) {
 }
 
 function updateRusseaar() {
+    getRussetekst = document.querySelector('.russ');
     getRussetekst.innerHTML = `${russ}russ ${getEndreAar_input.value}`;
 };
 
 
 const getSaveButton = document.querySelector('#buttonSave');
 
-const getLagredeRussekortKnapp = document.querySelector('#buttonGetSaved');
 
 const getLagredeRussekortBox = document.querySelector('#lagredeRussekort');
 getSaveButton.addEventListener('click', () => {
@@ -391,10 +424,6 @@ getSaveButton.addEventListener('click', () => {
     alerted("Lagret russekortet!");
 });
 
-getLagredeRussekortKnapp.addEventListener('click', () => {
-    hentLagredeRussekort();//fortsett her
-    visibility(getLagredeRussekortBox);
-});
 
 function hentLagredeRussekort() {
     console.log(lagredeRussekortArray);
@@ -425,7 +454,6 @@ function afterPrint() {
 }
 const getBilde = document.querySelector('#bilde');
 const getLogo = document.querySelector('#logoFile');
-const getRusselogoen = document.querySelector('#russelogoen');
 
 getLogo.addEventListener('change', function () {
     try {
@@ -465,8 +493,15 @@ getBilde.addEventListener('change', function () {
 
             reader.readAsDataURL(this.files[0]);
             reader.addEventListener("load", () => {
+                try {
+                    
                 localStorage.setItem("myRecentImage", reader.result);
 
+                } catch (error) {
+                    alert("Bilde var for stort til å lagres for neste gang, \n så du må bare laste det opp på nytt før du bruker det");
+                
+                    localStorage.setItem("myRecentImage", reader.result);
+                }
                 let currentRecentImage = localStorage.getItem("myRecentImage");
                 if (currentRecentImage) {
                     document.querySelector('#russebilde').setAttribute("src", currentRecentImage);
@@ -483,11 +518,9 @@ getBilde.addEventListener('change', function () {
         document.querySelector("#russebilde").src = URL.createObjectURL(getBilde.files[0]);
     };
 });
-const getNavn = document.querySelector('.navn');
-const getNavnInput = document.querySelector('#navn_input');
 
 getNavnInput.addEventListener('input', () => {
-
+    getNavn = document.querySelector('.navn');
     getNavn.setAttribute('data-text', getNavnInput.value)
     getNavn.innerHTML = "<br>" + getNavn.getAttribute('data-text');
     if (getNavnInput.value.length > 15) {
@@ -497,13 +530,12 @@ getNavnInput.addEventListener('input', () => {
     }
 })
 
-const getSkole = document.querySelector('.header');
-const getSkoleInput = document.querySelector('#skole_input');
-
 
 getSkoleInput.addEventListener('input', () => {
+    getSkole = document.querySelector('.header');
     if (getSkoleInput.value.length > 31) {
         getSkole.style.letterSpacing = "0.001rem";
+        getSkole.innerHTML = getSkole.getAttribute('data-text');
     } else {
         getSkole.style.letterSpacing = "";
         getSkole.setAttribute('data-text', getSkoleInput.value);
@@ -512,7 +544,6 @@ getSkoleInput.addEventListener('input', () => {
 })
 
 const getFargeVelger = document.getElementsByName('farge');
-const getRussetekst = document.querySelector('.russ');
 
 const getEndreAar_input = document.querySelector('#endreAar input');
 let russ = "Rød";
@@ -538,22 +569,6 @@ for (let f of getFargeVelger) {
 
     })
 }
-
-const getAdresse = document.querySelector('.adresse');
-const getTlf = document.querySelector('.tlf');
-const getGruppe = document.querySelector('.gruppe');
-const getFooter = document.querySelector('.footer');
-
-const getAdresseInput = document.querySelector('#adresse_input');
-const getTlfInput = document.querySelector('#tlf_input');
-const getGruppeInput = document.querySelector('#gruppe_input');
-
-const getSitatselect = document.querySelector('select');
-const getTilfeldigSitatKnapp = document.querySelector('#tilfeldigsitater label button');
-const getTilfeldigSitatOmraade = document.querySelector('#tilfeldigsitater');
-const getTilfeldigSitatFelt = document.querySelector('.tilfeldigSitat');
-const getEgne = document.querySelector('#egnesitater');
-
 
 let sitater = ["Shut the f*** up Sondre!", "🤑", "😛", "Etter sølvet kommer gulvet, etter gulvet kommer kjellern, etter kjellern kommer hølet", "Saturdays are for the boys", "2cool4school", "joiner du mc?",
     "Dette russekortet skulle heller vært en NFT..."
@@ -583,6 +598,7 @@ getTilfeldigSitatKnapp.addEventListener('click', () => {
 })
 
 getAdresseInput.addEventListener('input', () => {
+    getAdresse = document.querySelector('.adresse');
     if (getAdresseInput.value.length > 25) {
         alert(`"${getAdresseInput.value}" er for langt`);
     } else {
@@ -593,6 +609,7 @@ getAdresseInput.addEventListener('input', () => {
 
 
 getTlfInput.addEventListener('input', () => {
+    getTlf = document.querySelector('.tlf');
     if (getTlfInput.value.length > 29) {
         alert(`${getTlfInput.value} er for langt`);
     } else {
@@ -603,6 +620,7 @@ getTlfInput.addEventListener('input', () => {
 
 
 getGruppeInput.addEventListener('input', () => {
+    getGruppe = document.querySelector('.gruppe');
     if (getGruppeInput.value.length > 28) {
         alert(`"${getGruppeInput.value}" er for langt`);
     } else {
@@ -610,12 +628,13 @@ getGruppeInput.addEventListener('input', () => {
     }
 
 });
-const getSitater = document.querySelectorAll('.footer p');
+let getSitater = document.querySelectorAll('.footer p');
 const getSitatInputer = document.querySelectorAll('.sitat_input');
 
 for (let i = 0; i < getSitatInputer.length; i++) {
 
     getSitatInputer[i].addEventListener('input', () => {
+        getSitater = document.querySelectorAll('.footer p');
         if (getSitatInputer[i].value.length <= 48) {
             getSitater[i].innerHTML = `${getSitatInputer[i].value}`;
         } else {
@@ -631,7 +650,6 @@ for (let i = 0; i < getSitatInputer.length; i++) {
 
 
 
-const printButton = document.querySelector('#buttonPrint');
 printButton.addEventListener('click', printDiv);
 //____________________________________________________________ekstra kode for innstillinger
 
@@ -674,19 +692,15 @@ getExit[0].addEventListener('click', () => {
     settingsVisibility = false;
 });
 
-let getMidstill = document.querySelector('#midtstill');
-let getAngre = document.querySelectorAll('.angre');
-let getFjernRussegruppe = document.querySelector('#fjernRussegruppe');
-let getRussegreier = document.querySelectorAll('.russe');
-
 getFjernRussegruppe.addEventListener('mouseover', () => {
-
+    getRussegreier = document.querySelectorAll('.russe');
     for (let i = 0; i < getRussegreier.length; i++) {
         getRussegreier[i].style.display = "none";
     }
 });
 
 getFjernRussegruppe.addEventListener('mouseout', () => {
+    getRussegreier = document.querySelectorAll('.russe');
     if (fjernRussegruppeClicked == false) {
 
         for (let i = 0; i < getRussegreier.length; i++) {
@@ -696,7 +710,7 @@ getFjernRussegruppe.addEventListener('mouseout', () => {
 });
 
 getFjernRussegruppe.addEventListener('click', () => {
-
+    getRussegreier = document.querySelectorAll('.russe');
     if (fjernRussegruppeClicked == false) {
 
         for (let i = 0; i < getRussegreier.length; i++) {

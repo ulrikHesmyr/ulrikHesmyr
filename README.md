@@ -1,7 +1,7 @@
 - 👋 Hi, I’m @ulrikHesmyr
-- 👀 I’m interested in coding, climbing, tennis and gaming
+- 👀 I’m interested in climbing, tennis and music
 - 🌱 I’m currently learning react and nextjs
-- 📫 How to reach me: ulrik.hesmyr2002@gmail.com
+- 📫 How to reach me: ulrik.hesmyr@gmail.com
 
 <!---
 ulrikHesmyr/ulrikHesmyr is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
